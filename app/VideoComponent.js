@@ -18,7 +18,7 @@ export default class VideoComponent extends Component {
       activeRoom: null, // Track the current active room
     };
     this.joinRoom = this.joinRoom.bind(this);
-    this.handleRoomNameChange = this.handleRoomNameChange.bind(this);    
+    this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +68,58 @@ export default class VideoComponent extends Component {
   }
 
   render() {
-    return <div>Video Component</div>;
+    /* 
+   Controls showing of the local track
+   Only show video track after user has joined a room else show nothing 
+  */
+    let showLocalTrack = this.state.localMediaAvailable ? (
+      <div className="flex-item">
+        <div ref="localMedia" />{" "}
+      </div>
+    ) : (
+      ""
+    );
+    /*
+   Controls showing of ‘Join Room’ or ‘Leave Room’ button.  
+   Hide 'Join Room' button if user has already joined a room otherwise 
+   show `Leave Room` button.
+  */
+    let joinOrLeaveRoomButton = this.state.hasJoinedRoom ? (
+      <RaisedButton
+        label="Leave Room"
+        secondary={true}
+        onClick={() => alert("Leave Room")}
+      />
+    ) : (
+      <RaisedButton label="Join Room" primary={true} onClick={this.joinRoom} />
+    );
+    return (
+      <Card>
+        <CardText>
+          <div className="flex-container">
+            {showLocalTrack} {/* Show local track if available */}
+            <div className="flex-item">
+              {/* 
+The following text field is used to enter a room name. It calls  `handleRoomNameChange` method when the text changes which sets the `roomName` variable initialized in the state.
+    */}
+              <TextField
+                hintText="Room Name"
+                onChange={this.handleRoomNameChange}
+                errorText={
+                  this.state.roomNameErr ? "Room Name is required" : undefined
+                }
+              />
+              <br />
+              {joinOrLeaveRoomButton}{" "}
+              {/* Show either ‘Leave Room’ or ‘Join Room’ button */}
+            </div>
+            {/* 
+The following div element shows all remote media (other                             participant’s tracks) 
+    */}
+            <div className="flex-item" ref="remoteMedia" id="remote-media" />
+          </div>
+        </CardText>
+      </Card>
+    );
   }
 }
