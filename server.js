@@ -4,7 +4,7 @@ const express = require("express");
 const AccessToken = require('twilio').jwt.AccessToken;
 const VideoGrant = AccessToken.VideoGrant;
 // var webpack = require("webpack");
-// var faker = require("faker");
+const faker = require("faker");
 
 const app = express();
 
