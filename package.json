@@ -13,7 +13,7 @@
     "faker": "^4.1.0",
     "material-ui": "^0.20.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.2.1",
     "react-tap-event-plugin": "^3.0.2",
     "twilio": "^3.42.1",
     "twilio-video": "^2.3.0"
