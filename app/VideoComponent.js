@@ -19,6 +19,7 @@ export default class VideoComponent extends Component {
     };
     this.joinRoom = this.joinRoom.bind(this);
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
+    this.roomJoined = this.roomJoined.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +66,38 @@ export default class VideoComponent extends Component {
         alert("Could not connect to Twilio: " + error.message);
       }
     );
+  }
+
+  // Attach the Tracks to the DOM.
+  attachTracks(tracks, container) {
+    tracks.forEach((track) => {
+      container.appendChild(track.attach());
+      console.log(new Date(), "---> attachTracks : " + JSON.stringify(track));
+    });
+  }
+
+  // Attach the Participant's Tracks to the DOM.
+  attachParticipantTracks(participant, container) {
+    let tracks = Array.from(participant.tracks.values());
+    this.attachTracks(tracks, container);
+    console.log(new Date(), "---> attachTracks : " + tracks);
+  }
+
+  roomJoined(room) {
+    // Called when a participant joins a room
+    console.log("Joined as '" + this.state.identity + "'");
+    this.setState({
+      activeRoom: room,
+      localMediaAvailable: true,
+      hasJoinedRoom: true, // Removes ‘Join Room’ button and shows ‘Leave Room’
+    });
+
+    // Attach LocalParticipant's tracks to the DOM, if not already attached.
+    var previewContainer = this.refs.localMedia;
+    if (!previewContainer.querySelector("video")) {
+      this.attachParticipantTracks(room.localParticipant, previewContainer);
+    }
+    // ... more event listeners
   }
 
   render() {
