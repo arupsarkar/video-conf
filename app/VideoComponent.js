@@ -193,6 +193,13 @@ export default class VideoComponent extends Component {
       ""
     );
 
+    let showRemoteTracks = this.state.localMediaAvailable ? (
+        <div className="flex-item">
+        <div ref="remoteMedia" />
+      </div>
+    ) : ( 
+        "" 
+    );
 
     /*
    Controls showing of ‘Join Room’ or ‘Leave Room’ button.  
@@ -224,7 +231,10 @@ export default class VideoComponent extends Component {
               <br />
               {joinOrLeaveRoomButton}
             </div>
-            <div className="flex-item" ref="remoteMedia" id="remote-media">
+            {/* <div className="flex-item" ref="remoteMedia" id="remote-media">
+            </div> */}
+            <div className="flex-container" id="remote-media">
+                {showRemoteTracks}
             </div>
           </div>
         </CardText>
