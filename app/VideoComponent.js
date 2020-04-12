@@ -118,13 +118,14 @@ export default class VideoComponent extends Component {
             console.log(new Date(), ' remote container false ' + remoteContainer.querySelector("video"));            
             this.attachParticipantTracks(room.localParticipant, remoteContainer);
         }else {
-            console.log(new Date(), ' remote container false ' + remoteContainer.querySelector("video"));            
+            console.log(new Date(), ' remote container true  ' + remoteContainer.querySelector("video"));            
         }
         // ... more event listeners
 
         // Attach the Tracks of the room's participants.
         room.participants.forEach((participant) => {
             console.log("Already in Room: '" + participant.identity + "'");
+            console.log(new Date(), " room.participants " + participant);
             let previewContainer = this.refs.remoteMedia;
             this.attachParticipantTracks(participant, previewContainer);
         });
@@ -132,18 +133,22 @@ export default class VideoComponent extends Component {
         // Participant joining room
         room.on("participantConnected", (participant) => {
             console.log("Joining: '" + participant.identity + "'");
+            console.log(new Date(), ' participantConnected : ' + participant);
         });
 
         // Attach participant’s tracks to DOM when they add a track
         room.on("trackAdded", (track, participant) => {
-            console.log(participant.identity + " added track: " + track.kind);
+            console.log(new Date(), " trackAdded track: " + track);
+            console.log(new Date() + " trackAdded track: " + participant);
             let previewContainer = this.refs.remoteMedia;
             this.attachTracks([track], previewContainer);
         });
 
         // Detach participant’s track from DOM when they remove a track.
         room.on("trackRemoved", (track, participant) => {
-            this.log(participant.identity + " removed track: " + track.kind);
+            console.log(participant.identity + " removed track: " + track.kind);
+            console.log(new Date(), ' trackRemoved: track - ' + track);
+            console.log(new Date(), ' trackRemoved: participant - ' + participant);
             this.detachTracks([track]);
         });
 
