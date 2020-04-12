@@ -129,6 +129,8 @@ export default class VideoComponent extends Component {
             console.log(new Date(), ' participantConnected : ' + participant);
 
             participant.on('trackAdded', track => {
+                console.log(new Date(), 'participantConnected:trackAdded track - ' + track);
+                console.log(new Date(), 'participantConnected:trackAdded participant - ' + participant);
                 let previewContainer = this.refs.remoteMedia;
                 previewContainer.appendChild(track.attach());
             });
