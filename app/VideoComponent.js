@@ -106,6 +106,7 @@ export default class VideoComponent extends Component {
 
     // Attach LocalParticipant's tracks to the DOM, if not already attached.
     let previewContainer = this.refs.localMedia;
+    let remotePreviewContainer = this.refs.remoteMedia;
     if (!previewContainer.querySelector("video")) {
       this.attachParticipantTracks(room.localParticipant, previewContainer);
     }
@@ -115,8 +116,9 @@ export default class VideoComponent extends Component {
     room.participants.forEach((participant) => {
       console.log("Already in Room: '" + participant.identity + "'");
       //var previewContainer = this.refs.remoteMedia;
-      previewContainer = this.refs.remoteMedia;
-      this.attachParticipantTracks(participant, previewContainer);
+      remotePreviewContainer = this.refs.remoteMedia;
+      //this.attachParticipantTracks(participant, previewContainer);
+      this.attachParticipantTracks(participant, remotePreviewContainer);
     });
 
     // Participant joining room
@@ -128,8 +130,9 @@ export default class VideoComponent extends Component {
     room.on("trackAdded", (track, participant) => {
       console.log(participant.identity + " added track: " + track.kind);
       //var previewContainer = this.refs.remoteMedia;
-      previewContainer = this.refs.remoteMedia;
-      this.attachTracks([track], previewContainer);
+      remotePreviewContainer = this.refs.remoteMedia;
+      //this.attachTracks([track], previewContainer);
+      this.attachTracks([track], remotePreviewContainer);
     });
 
     // Detach participant’s track from DOM when they remove a track.
