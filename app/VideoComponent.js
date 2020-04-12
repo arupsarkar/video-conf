@@ -139,6 +139,9 @@ export default class VideoComponent extends Component {
                 this.attachTracks([tracks], previewContainer);                
                 //document.getElementById('remote-media-div').appendChild(track.attach());
               });            
+              participant.on('trackAdded', track => {
+                console.log(new Date(), 'participantConnected:trackAdded track' + track);
+              });              
 
         });
 
