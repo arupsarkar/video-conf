@@ -130,6 +130,8 @@ export default class VideoComponent extends Component {
 
             participant.tracks.forEach(track => {
                 console.log(new Date(), 'participantConnected:track' + track);
+                let previewContainer = this.refs.remoteMedia;
+                this.attachTracks(track, previewContainer);                
                 //document.getElementById('remote-media-div').appendChild(track.attach());
               });            
 
