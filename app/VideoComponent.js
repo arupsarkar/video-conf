@@ -134,12 +134,23 @@ export default class VideoComponent extends Component {
         room.on("participantConnected", (participant) => {
             console.log("Joining: '" + participant.identity + "'");
             console.log(new Date(), ' participantConnected : ' + participant);
+
+            participant.tracks.forEach(track => {
+                let previewContainer = this.refs.remoteMedia;
+                previewContainer.appendChild(track.attach());
+              });
+            
+              participant.on('trackAdded', track => {
+                let previewContainer = this.refs.remoteMedia;
+                previewContainer.appendChild(track.attach());
+              });
+
         });
 
         // Attach participant’s tracks to DOM when they add a track
         room.on("trackAdded", (track, participant) => {
             console.log(new Date(), " trackAdded track: " + track);
-            console.log(new Date() + " trackAdded track: " + participant);
+            console.log(new Date() + " trackAdded participant: " + participant);
             let previewContainer = this.refs.remoteMedia;
             this.attachTracks([track], previewContainer);
         });
