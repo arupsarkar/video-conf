@@ -59,11 +59,10 @@ export default class VideoComponent extends Component {
       connectOptions.tracks = this.state.previewTracks;
     }
 
-    /* 
- Connect to a room by providing the token and connection    options that include the room name and tracks. We also show an alert if an error occurs while connecting to the room.    
- */
 
-    Video.connect(this.state.token, connectOptions).then(
+    Video.connect(this.state.token, connectOptions).then( (results) => {
+        console.log(new Date() , 'video connect results ' + JSON.stringify(results))
+    },
       this.roomJoined,
       (error) => {
         alert("Could not connect to Twilio: " + error.message);
