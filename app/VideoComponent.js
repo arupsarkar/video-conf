@@ -21,6 +21,8 @@ export default class VideoComponent extends Component {
     this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
     this.roomJoined = this.roomJoined.bind(this);
     this.leaveRoom = this.leaveRoom.bind(this);
+    this.detachTracks = this.detachTracks.bind(this);
+    this.detachParticipantTracks = this.detachParticipantTracks.bind(this);
   }
 
   componentDidMount() {
@@ -117,6 +119,21 @@ export default class VideoComponent extends Component {
     this.state.activeRoom.disconnect();
     this.setState({ hasJoinedRoom: false, localMediaAvailable: false });
  }  
+
+ detachTracks(tracks) {
+    tracks.forEach(track => {
+      track.detach().forEach(detachedElement => {
+        detachedElement.remove();
+      });
+    });
+  }
+
+  detachParticipantTracks(participant) {
+    //var tracks = Array.from(participant.tracks.values());
+    let tracks = this.getTracks(participant);
+    console.log(new Date(), ' detach participants tracks ' + tracks);
+    this.detachTracks(tracks);
+  }
 
   render() {
     /* 
