@@ -106,19 +106,12 @@ export default class VideoComponent extends Component {
 
         // Attach LocalParticipant's tracks to the DOM, if not already attached.
         let previewContainer = this.refs.localMedia;
-        let remoteContainer = this.refs.remoteMedia;
 
         if (!previewContainer.querySelector("video")) {
             console.log(new Date(), ' preview container false ' + previewContainer.querySelector("video"));
             this.attachParticipantTracks(room.localParticipant, previewContainer);
         } else {
             console.log(new Date(), ' preview container false true ' + previewContainer.querySelector("video"));
-        }
-        if (!remoteContainer.querySelector("video")) {
-            console.log(new Date(), ' remote container false ' + remoteContainer.querySelector("video"));
-            this.attachParticipantTracks(room.localParticipant, remoteContainer);
-        } else {
-            console.log(new Date(), ' remote container true  ' + remoteContainer.querySelector("video"));
         }
         // ... more event listeners
 
