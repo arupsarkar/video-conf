@@ -108,7 +108,7 @@ export default class VideoComponent extends Component {
     });
 
     // Attach LocalParticipant's tracks to the DOM, if not already attached.
-    var previewContainer = this.refs.localMedia;
+    let previewContainer = this.refs.localMedia;
     if (!previewContainer.querySelector("video")) {
       this.attachParticipantTracks(room.localParticipant, previewContainer);
     }
@@ -117,7 +117,8 @@ export default class VideoComponent extends Component {
     // Attach the Tracks of the room's participants.
     room.participants.forEach((participant) => {
       console.log("Already in Room: '" + participant.identity + "'");
-      var previewContainer = this.refs.remoteMedia;
+      //var previewContainer = this.refs.remoteMedia;
+      previewContainer = this.refs.remoteMedia;
       this.attachParticipantTracks(participant, previewContainer);
     });
 
@@ -129,7 +130,8 @@ export default class VideoComponent extends Component {
     // Attach participant’s tracks to DOM when they add a track
     room.on("trackAdded", (track, participant) => {
       console.log(participant.identity + " added track: " + track.kind);
-      var previewContainer = this.refs.remoteMedia;
+      //var previewContainer = this.refs.remoteMedia;
+      previewContainer = this.refs.remoteMedia;
       this.attachTracks([track], previewContainer);
     });
 
@@ -223,7 +225,6 @@ export default class VideoComponent extends Component {
               {joinOrLeaveRoomButton}
             </div>
             <div className="flex-item" ref="remoteMedia" id="remote-media">
-                {showLocalTrack}
             </div>
           </div>
         </CardText>
