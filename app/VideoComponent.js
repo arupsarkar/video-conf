@@ -61,9 +61,10 @@ export default class VideoComponent extends Component {
 
 
     Video.connect(this.state.token, connectOptions).then( (results) => {
-        console.log(new Date() , 'video connect results ' + JSON.stringify(results))
+        console.log(new Date() , 'video connect results ' + JSON.stringify(results));
+        this.roomJoined
     },
-      this.roomJoined,
+      
       (error) => {
         alert("Could not connect to Twilio: " + error.message);
       }
