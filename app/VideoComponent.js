@@ -87,6 +87,10 @@ export default class VideoComponent extends Component {
         });
     }
 
+    handlePartcipant(track, container) {
+        console.log(new Date(), "---> attachTracks : " + JSON.stringify(track));
+        container.appendChild(track.attach());
+    }
     // Attach the Participant's Tracks to the DOM.
     attachParticipantTracks(participant, container) {
         //let tracks = Array.from(participant.tracks.values());
@@ -131,7 +135,7 @@ export default class VideoComponent extends Component {
             participant.tracks.forEach(track => {
                 console.log(new Date(), 'participantConnected:track' + track);
                 let previewContainer = this.refs.remoteMedia;
-                this.attachTracks(track, previewContainer);                
+                this.handlePartcipant(track, previewContainer);                
                 //document.getElementById('remote-media-div').appendChild(track.attach());
               });            
 
