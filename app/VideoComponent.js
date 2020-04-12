@@ -233,7 +233,7 @@ export default class VideoComponent extends Component {
             </div>
             {/* <div className="flex-item" ref="remoteMedia" id="remote-media">
             </div> */}
-            <div className="flex-container" id="remote-media">
+            <div className="flex-item" id="remote-media">
                 {showRemoteTracks}
             </div>
           </div>
