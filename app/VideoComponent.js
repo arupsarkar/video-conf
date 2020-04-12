@@ -190,6 +190,8 @@ export default class VideoComponent extends Component {
     ) : (
       ""
     );
+
+
     /*
    Controls showing of ‘Join Room’ or ‘Leave Room’ button.  
    Hide 'Join Room' button if user has already joined a room otherwise 
@@ -220,7 +222,9 @@ export default class VideoComponent extends Component {
               <br />
               {joinOrLeaveRoomButton}
             </div>
-            <div className="flex-item" ref="remoteMedia" id="remote-media" />
+            <div className="flex-item" ref="remoteMedia" id="remote-media">
+                {showLocalTrack}
+            </div>
           </div>
         </CardText>
       </Card>
