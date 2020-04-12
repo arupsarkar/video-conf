@@ -111,14 +111,14 @@ export default class VideoComponent extends Component {
         if (!previewContainer.querySelector("video")) {
             console.log(new Date(), ' preview container false ' + previewContainer.querySelector("video"));
             this.attachParticipantTracks(room.localParticipant, previewContainer);
-        }else {
+        } else {
             console.log(new Date(), ' preview container false true ' + previewContainer.querySelector("video"));
         }
         if (!remoteContainer.querySelector("video")) {
-            console.log(new Date(), ' remote container false ' + remoteContainer.querySelector("video"));            
+            console.log(new Date(), ' remote container false ' + remoteContainer.querySelector("video"));
             this.attachParticipantTracks(room.localParticipant, remoteContainer);
-        }else {
-            console.log(new Date(), ' remote container true  ' + remoteContainer.querySelector("video"));            
+        } else {
+            console.log(new Date(), ' remote container true  ' + remoteContainer.querySelector("video"));
         }
         // ... more event listeners
 
@@ -131,19 +131,19 @@ export default class VideoComponent extends Component {
         });
 
         // Participant joining room
-        room.on("participantConnected", (participant) => {
-            console.log("Joining: '" + participant.identity + "'");
+        room.on("participantConnected", participant => {
+            console.log(`Participant "${participant.identity}" connected`);
             console.log(new Date(), ' participantConnected : ' + participant);
 
             participant.tracks.forEach(track => {
                 let previewContainer = this.refs.remoteMedia;
                 previewContainer.appendChild(track.attach());
-              });
-            
-              participant.on('trackAdded', track => {
+            });
+
+            participant.on('trackAdded', track => {
                 let previewContainer = this.refs.remoteMedia;
                 previewContainer.appendChild(track.attach());
-              });
+            });
 
         });
 
