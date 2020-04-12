@@ -222,6 +222,7 @@ export default class VideoComponent extends Component {
               {joinOrLeaveRoomButton}
             </div>
             <div className="flex-item" ref="localMedia" id="remote-media">
+                {showLocalTrack}
             </div>
           </div>
         </CardText>
