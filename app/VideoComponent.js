@@ -68,6 +68,17 @@ export default class VideoComponent extends Component {
     );
   }
 
+  // Get the Participant's Tracks.
+  getTracks(participant) {
+    return Array.from(participant.tracks.values())
+      .filter(function (publication) {
+        return publication.track;
+      })
+      .map(function (publication) {
+        return publication.track;
+      });
+  }
+
   // Attach the Tracks to the DOM.
   attachTracks(tracks, container) {
     tracks.forEach((track) => {
@@ -78,9 +89,10 @@ export default class VideoComponent extends Component {
 
   // Attach the Participant's Tracks to the DOM.
   attachParticipantTracks(participant, container) {
-    let tracks = Array.from(participant.tracks.values());
-    this.attachTracks(tracks, container);
+    //let tracks = Array.from(participant.tracks.values());
+    let tracks = this.getTracks(participant);
     console.log(new Date(), "---> attachTracks : " + tracks);
+    this.attachTracks(tracks, container);
   }
 
   roomJoined(room) {
