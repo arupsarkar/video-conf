@@ -146,7 +146,7 @@ export default class VideoComponent extends Component {
         });
 
         // Attach participant’s tracks to DOM when they add a track
-        room.on("trackAdded", (track, participant) => {
+        room.on("trackPublished", (track, participant) => {
             console.log(new Date(), " trackAdded track: " + track);
             console.log(new Date() + " trackAdded participant: " + participant);
             let previewContainer = this.refs.remoteMedia;
